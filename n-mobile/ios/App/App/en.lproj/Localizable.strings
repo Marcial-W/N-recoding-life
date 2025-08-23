@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  N
+  
+  Created by Developer on 2024.
+*/
+
+// App Name
+"CFBundleDisplayName" = "N";
+
+// General
+"OK" = "OK";
+"Cancel" = "Cancel";
+"Retry" = "Retry";
+"Error" = "Error";
+"Success" = "Success";
+"Loading" = "Loading...";
+"Network Error" = "Network Error";
+"Unknown Error" = "Unknown Error";
+
+// Permission Descriptions
+"Camera Permission" = "Camera Permission";
+"Photo Library Permission" = "Photo Library Permission";
+"Microphone Permission" = "Microphone Permission";
+"Location Permission" = "Location Permission";
+"Notification Permission" = "Notification Permission";
+
+// Error Messages
+"Load Error" = "Load Error";
+"Network Connection Error" = "Network Connection Error";
+"File Access Error" = "File Access Error";
+"Permission Denied" = "Permission Denied";
+
+// Feature Descriptions
+"Take Photo" = "Take Photo";
+"Choose Photo" = "Choose Photo";
+"Record Audio" = "Record Audio";
+"Get Location" = "Get Location";
+"Send Notification" = "Send Notification";
+
+// Bottom Navigation
+"Home" = "Home";
+"Create" = "Create";
+"Statistics" = "Statistics";
+"Profile" = "Profile";
+
+// Create Record
+"Create Record" = "Create Record";
+"Record Title" = "Record Title";
+"Record Content" = "Record Content";
+"Save Record" = "Save Record";
+"Record Saved" = "Record Saved";
+
+// Statistics
+"Statistics" = "Statistics";
+"Total Records" = "Total Records";
+"Today Records" = "Today Records";
+"This Week" = "This Week";
+"This Month" = "This Month";
+
+// Profile
+"Profile" = "Profile";
+"Settings" = "Settings";
+"About" = "About";
+"Version" = "Version";
+"Developer" = "Developer"; 

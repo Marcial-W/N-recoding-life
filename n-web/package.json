@@ -1,0 +1,38 @@
+{
+  "name": "n-web",
+  "version": "1.0.0",
+  "description": "N - 生活记录应用 (网页版)",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/",
+    "build": "echo '网页版无需构建'",
+    "dev": "live-server --port=3000 --open=/",
+    "serve": "live-server --port=3000"
+  },
+  "keywords": [
+    "生活记录",
+    "日记",
+    "记录",
+    "统计",
+    "分析",
+    "pwa"
+  ],
+  "author": "N Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {},
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+} 

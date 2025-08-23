@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>N - 生活记录</title>
+    <meta name="description" content="N - 简洁轻量的生活记录应用，记录生活中的每一个重要时刻">
+    <meta name="keywords" content="生活记录,日记,记录,统计,分析">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="N - 生活记录">
+    <meta property="og:description" content="简洁轻量的生活记录应用，记录生活中的每一个重要时刻">
+    
+    <!-- Twitter -->
+    <meta name="twitter:title" content="N - 生活记录">
+    <meta name="twitter:description" content="简洁轻量的生活记录应用，记录生活中的每一个重要时刻">
+
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <!-- 引入 JSZip 用于 ZIP 导出 -->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <!-- 引入 html2canvas 和 jsPDF 用于导出 PDF -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-start: #4f46e5;
+            --primary-end: #9333ea;
+            --surface: #f8fafc;
+            --surface-variant: #f1f5f9;
+            --outline: #e2e8f0;
+            --outline-variant: #cbd5e1;
+            --on-surface: #0f172a;
+            --on-surface-variant: #64748b;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-strong: rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    @layer base {
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--on-surface);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            min-height: 100vh;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+    }
+
+    @layer components {
+        .gradient-primary {
+            background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+        }
+        
+        .btn {
+            @apply px-6 py-3 rounded-2xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transform hover:scale-105 active:scale-95;
+            box-shadow: 0 4px 14px 0 var(--shadow);
+        }
+        
+        .btn-primary {
+            @apply text-white shadow-lg hover:shadow-xl;
+            background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+        }
+        
+        .btn-secondary {
+            @apply bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300;
+        }
+        
+        .input-field {
+            @apply w-full px-4 py-3 bg-white rounded-2xl border-2 border-gray-100 focus:border-purple-300 focus:outline-none transition-all duration-300;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .input-field:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px var(--shadow-strong);
+        }
+        
+        .card {
+            @apply bg-white rounded-3xl border border-gray-100 p-6 transition-all duration-300 hover:shadow-xl;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .record-card {
+            @apply bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-100 p-4 transition-all duration-300 hover:shadow-lg cursor-pointer;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        
+        .record-card:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary-start);
+        }
+        
+        .bottom-nav {
+            @apply fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-100 flex items-center justify-around py-3 px-4;
+            box-shadow: 0 -4px 20px var(--shadow);
+        }
+        
+        .nav-item {
+            @apply flex flex-col items-center justify-center p-3 rounded-2xl transition-all duration-300 cursor-pointer relative;
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .nav-item:not(.active) {
+            color: var(--on-surface-variant);
+        }
+        
+        .nav-item:not(.active):hover {
+            background: var(--surface-variant);
+            transform: scale(1.05);
+        }
+        
+        .stats-metric {
+            @apply text-center p-4 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-100;
+            box-shadow: 0 2px 12px var(--shadow);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+    </style>
+
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script>
+        const ChartJS = window.Chart;
+    </script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="N - 生活记录">
+    
+    <script type="text/babel" src="components/BottomNav.js"></script>
+    <script type="text/babel" src="components/CreateRecord.js"></script>
+    <script type="text/babel" src="components/Statistics.js"></script>
+    <script type="text/babel" src="components/Profile.js"></script>
+    <script type="text/babel" src="utils/storage.js"></script>
+    <script type="text/babel" src="app.js"></script>
+    
+    <script>
+        // 注册 Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

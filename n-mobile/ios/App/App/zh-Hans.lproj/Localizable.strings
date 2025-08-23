@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  N
+  
+  Created by Developer on 2024.
+*/
+
+// 应用名称
+"CFBundleDisplayName" = "N";
+
+// 通用
+"OK" = "确定";
+"Cancel" = "取消";
+"Retry" = "重试";
+"Error" = "错误";
+"Success" = "成功";
+"Loading" = "加载中...";
+"Network Error" = "网络错误";
+"Unknown Error" = "未知错误";
+
+// 权限描述
+"Camera Permission" = "相机权限";
+"Photo Library Permission" = "相册权限";
+"Microphone Permission" = "麦克风权限";
+"Location Permission" = "位置权限";
+"Notification Permission" = "通知权限";
+
+// 错误信息
+"Load Error" = "加载错误";
+"Network Connection Error" = "网络连接错误";
+"File Access Error" = "文件访问错误";
+"Permission Denied" = "权限被拒绝";
+
+// 功能描述
+"Take Photo" = "拍摄照片";
+"Choose Photo" = "选择照片";
+"Record Audio" = "录制音频";
+"Get Location" = "获取位置";
+"Send Notification" = "发送通知";
+
+// 底部导航
+"Home" = "首页";
+"Create" = "创建";
+"Statistics" = "统计";
+"Profile" = "个人";
+
+// 创建记录
+"Create Record" = "创建记录";
+"Record Title" = "记录标题";
+"Record Content" = "记录内容";
+"Save Record" = "保存记录";
+"Record Saved" = "记录已保存";
+
+// 统计
+"Statistics" = "统计";
+"Total Records" = "总记录数";
+"Today Records" = "今日记录";
+"This Week" = "本周";
+"This Month" = "本月";
+
+// 个人资料
+"Profile" = "个人资料";
+"Settings" = "设置";
+"About" = "关于";
+"Version" = "版本";
+"Developer" = "开发者"; 
