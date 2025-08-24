@@ -82,4 +82,6 @@ class BaseFilter():
         """
         pass
 
-from . import memory_filter, redis_filter, mysql_filter
+from .memory_filter import MemoryFilter
+from .redis_filter import RedisFilter
+from .mysql_filter import MySQLFilter

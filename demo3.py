@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 import logging
-from data_filter.mysql_filter import MySQLFilter
+from data_filter import MySQLFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)

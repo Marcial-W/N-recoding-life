@@ -5,7 +5,7 @@
 # @File : demo2.py
 # @Software: PyCharm
 
-from data_filter.memory_filter import MemoryFilter
+from data_filter import MemoryFilter
 
 def main():
 

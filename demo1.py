@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 import logging
-from data_filter.redis_filter import RedisFilter
+from data_filter import RedisFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
