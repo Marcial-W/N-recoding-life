@@ -4,21 +4,14 @@
 
 ## 功能特性
 
-<<<<<<< Updated upstream
-- **多种存储方式**：支持内存、Redis、MySQL三种存储方式
-=======
 - **多种存储方式**：支持内存、Redis、MySQL、布隆过滤器四种存储方式
->>>>>>> Stashed changes
 - **连接池优化**：MySQL和Redis都使用连接池，提高性能
 - **配置管理**：统一的配置文件管理，支持环境变量
 - **异常处理**：完善的错误处理和日志记录
 - **统计信息**：提供数据统计和性能监控
 - **向后兼容**：保持原有API的兼容性
-<<<<<<< Updated upstream
-=======
 - **模块化设计**：清晰的代码结构，易于扩展和维护
 - **Docker支持**：提供完整的Docker部署方案
->>>>>>> Stashed changes
 
 ## 项目结构
 
@@ -28,20 +21,6 @@ data_process/
 │   ├── __init__.py       # 基础过滤器类
 │   ├── memory_filter.py  # 内存过滤器
 │   ├── redis_filter.py   # Redis过滤器
-<<<<<<< Updated upstream
-│   └── mysql_filter.py   # MySQL过滤器
-├── config.py             # 配置文件
-├── demo1.py              # Redis过滤器演示
-├── demo2.py              # 内存过滤器演示
-├── demo3.py              # MySQL过滤器演示
-├── test_redis_connection.py  # Redis连接测试
-├── test_mysql_filter.py      # MySQL过滤器测试
-├── env_example.txt       # 环境变量配置示例
-└── docker_config/        # Docker配置
-    ├── docker-compose.yaml
-    ├── Dockerfile
-    └── mysql_data/
-=======
 │   ├── mysql_filter.py   # MySQL过滤器
 │   └── bloomfilter.py    # 布隆过滤器
 ├── demo/                  # 演示文件
@@ -54,6 +33,7 @@ data_process/
 │   ├── test_mysql_filter.py         # MySQL过滤器测试
 │   └── test_bloom_filter.py         # 布隆过滤器测试
 ├── config.py             # 配置文件
+├── requirements.txt      # 项目依赖
 ├── env_example.txt       # 环境变量配置示例
 ├── README.md             # 项目说明文档
 └── docker_config/        # Docker配置
@@ -61,109 +41,10 @@ data_process/
     ├── Dockerfile
     ├── mysql_data/
     └── redis_data/
->>>>>>> Stashed changes
 ```
 
 ## 安装依赖
 
-<<<<<<< Updated upstream
-```bash
-pip install redis sqlalchemy pymysql
-```
-
-## 配置说明
-
-### 1. 环境变量配置
-
-复制 `env_example.txt` 为 `.env` 文件，并根据需要修改配置：
-
-```bash
-# MySQL配置
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=123456
-MYSQL_DATABASE=data1
-
-# Redis配置
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-REDIS_DB=0
-```
-
-### 2. 代码中使用配置
-
-```python
-from config import config
-
-# 获取MySQL连接URL
-mysql_url = config.get_mysql_url()
-
-# 获取Redis配置
-redis_config = config.get_redis_config()
-
-# 打印当前配置
-config.print_config()
-```
-
-## 使用方法
-
-### 1. 内存过滤器（适合小数据量）
-
-```python
-from data_filter.memory_filter import MemoryFilter
-
-filter = MemoryFilter()
-data = ['111', '222', '111', '333']
-
-for item in data:
-    if filter.is_exist(item):
-        print(f"'{item}' 已存在")
-    else:
-        filter.save_data(item)
-        print(f"'{item}' 保存成功")
-```
-
-### 2. Redis过滤器（适合分布式环境）
-
-```python
-from data_filter.redis_filter import RedisFilter
-
-# 使用配置文件
-filter = RedisFilter()
-
-# 或自定义配置
-filter = RedisFilter(
-    redis_host='127.0.0.1',
-    redis_port=6379,
-    redis_db=0,
-    redis_key='my_filter'
-)
-
-data = ['111', '222', '111', '333']
-
-for item in data:
-    if filter.is_exist(item):
-        print(f"'{item}' 已存在")
-    else:
-        result = filter.save_data(item)
-        if result == 1:
-            print(f"'{item}' 保存成功")
-
-# 获取统计信息
-stats = filter.get_stats()
-print(f"统计信息: {stats}")
-
-# 关闭连接
-filter.close_connection()
-```
-
-### 3. MySQL过滤器（适合大数据量）
-
-```python
-from data_filter.mysql_filter import MySQLFilter
-
-=======
 ### 快速安装
 
 ```bash
@@ -327,7 +208,6 @@ filter.close_connection()
 ```python
 from data_filter import MySQLFilter
 
->>>>>>> Stashed changes
 # 使用配置文件
 filter = MySQLFilter()
 
@@ -336,11 +216,6 @@ filter = MySQLFilter('mysql+pymysql://user:pass@host:port/db')
 
 data = ['111', '222', '111', '333']
 
-<<<<<<< Updated upstream
-for item in data:
-    if filter.is_exist(item):
-        print(f"'{item}' 已存在")
-=======
 saved_count = 0
 existing_count = 0
 
@@ -348,13 +223,10 @@ for item in data:
     if filter.is_exist(item):
         print(f"'{item}' 已存在")
         existing_count += 1
->>>>>>> Stashed changes
     else:
         result = filter.save_data(item)
         if result == 1:
             print(f"'{item}' 保存成功")
-<<<<<<< Updated upstream
-=======
             saved_count += 1
         else:
             print(f"'{item}' 保存失败")
@@ -362,7 +234,6 @@ for item in data:
 
 print(f"新增数据: {saved_count} 条")
 print(f"重复数据: {existing_count} 条")
->>>>>>> Stashed changes
 
 # 获取统计信息
 stats = filter.get_stats()
@@ -372,15 +243,6 @@ print(f"统计信息: {stats}")
 MySQLFilter.close_connections()
 ```
 
-<<<<<<< Updated upstream
-## Docker部署
-
-### 启动MySQL容器
-
-```bash
-cd docker_config
-docker-compose up -d
-=======
 ### 4. 布隆过滤器（适合超大数据量，可能有误判）
 
 ```python
@@ -450,7 +312,6 @@ docker-compose ps
 
 # 查看日志
 docker-compose logs -f
->>>>>>> Stashed changes
 ```
 
 ### 环境变量配置
@@ -458,44 +319,12 @@ docker-compose logs -f
 在Docker环境中，可以通过环境变量配置：
 
 ```bash
-<<<<<<< Updated upstream
-=======
 # MySQL配置
->>>>>>> Stashed changes
 export MYSQL_HOST=mysql8
 export MYSQL_PORT=3306
 export MYSQL_USER=root
 export MYSQL_PASSWORD=123456
 export MYSQL_DATABASE=data1
-<<<<<<< Updated upstream
-```
-
-## 测试
-
-### Redis测试
-
-```bash
-python test_redis_connection.py
-```
-
-### MySQL测试
-
-```bash
-python test_mysql_filter.py
-```
-
-### 演示程序
-
-```bash
-# Redis演示
-python demo1.py
-
-# 内存演示
-python demo2.py
-
-# MySQL演示
-python demo3.py
-=======
 
 # Redis配置
 export REDIS_HOST=redis
@@ -553,7 +382,6 @@ for demo in demo/*_demo.py; do
     python "$demo"
     echo "------------------------"
 done
->>>>>>> Stashed changes
 ```
 
 ## 性能优化
@@ -575,8 +403,6 @@ Redis连接池在代码中已优化，支持：
 - 超时重试
 - 自动解码响应
 
-<<<<<<< Updated upstream
-=======
 ### 性能对比
 
 | 过滤器类型 | 适用场景 | 内存占用 | 查询速度 | 持久化 | 误判率 |
@@ -593,7 +419,6 @@ Redis连接池在代码中已优化，支持：
 - **大数据量（> 100万条）**：使用MySQL过滤器
 - **超大数据量（> 1亿条）**：使用布隆过滤器
 
->>>>>>> Stashed changes
 ## 新增功能
 
 ### 1. 统计信息
@@ -603,15 +428,12 @@ Redis连接池在代码中已优化，支持：
 ```python
 stats = filter.get_stats()
 print(f"总记录数: {stats['total_records']}")
-<<<<<<< Updated upstream
-=======
 
 # 不同过滤器的统计信息格式
 # 内存过滤器: {'total_records': 100, 'storage_type': 'memory_set'}
 # Redis过滤器: {'total_records': 100, 'redis_key': 'filter', 'redis_db': 0}
 # MySQL过滤器: {'total_records': 100, 'table_name': 'filter'}
 # 布隆过滤器: {'total_records': 100, 'bit_array_size': 1000000, 'hash_count': 7}
->>>>>>> Stashed changes
 ```
 
 ### 2. 数据清理
@@ -619,25 +441,18 @@ print(f"总记录数: {stats['total_records']}")
 ```python
 # 清空所有数据（谨慎使用）
 success = filter.clear_all()
-<<<<<<< Updated upstream
-=======
 
 # 检查清空结果
 if success:
     print("数据清空成功")
 else:
     print("数据清空失败")
->>>>>>> Stashed changes
 ```
 
 ### 3. 连接管理
 
 ```python
 # 关闭连接
-<<<<<<< Updated upstream
-filter.close_connection()  # Redis
-MySQLFilter.close_connections()  # MySQL
-=======
 filter.close_connection()  # Redis和布隆过滤器
 MySQLFilter.close_connections()  # MySQL
 
@@ -665,7 +480,6 @@ for item in data_list:
 
 print(f"已存在: {len(existing_items)} 条")
 print(f"新增: {len(new_items)} 条")
->>>>>>> Stashed changes
 ```
 
 ## 注意事项
@@ -673,44 +487,16 @@ print(f"新增: {len(new_items)} 条")
 1. **数据安全**：`clear_all()` 方法会清空所有数据，请谨慎使用
 2. **连接管理**：程序结束时记得关闭数据库连接
 3. **并发安全**：MySQL过滤器已处理并发冲突
-<<<<<<< Updated upstream
-4. **性能考虑**：大数据量建议使用MySQL，小数据量使用内存过滤器
-5. **配置优先级**：代码参数 > 环境变量 > 默认配置
-=======
 4. **性能考虑**：根据数据量选择合适的过滤器类型
 5. **配置优先级**：代码参数 > 环境变量 > 默认配置
 6. **布隆过滤器误判**：布隆过滤器可能存在误判，适用于对准确性要求不高的场景
 7. **内存使用**：内存过滤器数据会占用程序内存，大数据量时注意内存使用
 8. **网络延迟**：Redis和MySQL过滤器受网络延迟影响，建议在本地或低延迟环境使用
->>>>>>> Stashed changes
 
 ## 故障排除
 
 ### MySQL连接问题
 
-<<<<<<< Updated upstream
-1. 检查MySQL服务是否启动
-2. 验证连接参数是否正确
-3. 确认数据库和表是否存在
-4. 检查用户权限
-
-### Redis连接问题
-
-1. 检查Redis服务是否启动
-2. 验证端口是否正确
-3. 确认防火墙设置
-4. 检查Redis配置
-
-### 性能问题
-
-1. 调整连接池大小
-2. 检查数据库索引
-3. 监控连接数使用情况
-4. 考虑使用批量操作
-
-## 更新日志
-
-=======
 1. **检查MySQL服务是否启动**
    ```bash
    # Windows
@@ -814,7 +600,6 @@ print(f"新增: {len(new_items)} 条")
 - 统一所有过滤器的API接口
 - 添加性能对比和选择建议
 
->>>>>>> Stashed changes
 ### v2.0.0
 - 添加配置文件管理
 - 优化MySQL连接池
@@ -825,9 +610,6 @@ print(f"新增: {len(new_items)} 条")
 ### v1.0.0
 - 基础过滤器功能
 - 支持内存、Redis、MySQL存储
-<<<<<<< Updated upstream
-- 基本去重功能 # h
-=======
 - 基本去重功能
 
 ## 贡献指南
@@ -873,4 +655,3 @@ print(f"新增: {len(new_items)} 条")
 ---
 
 **感谢使用数据去重过滤器项目！** 🚀
->>>>>>> Stashed changes
