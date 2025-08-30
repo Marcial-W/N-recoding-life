@@ -7,7 +7,7 @@
 
 import logging
 import time
-from data_filter.bloomfilter import BloomFilter
+from request_manage.utils.data_filter.bloomfilter import BloomFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)

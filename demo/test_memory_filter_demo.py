@@ -5,7 +5,7 @@
 # @File : test_memory_filter_demo.py
 # @Software: PyCharm
 
-from data_filter import MemoryFilter
+from request_manage.utils.data_filter.memory_filter import MemoryFilter
 
 def main():
 

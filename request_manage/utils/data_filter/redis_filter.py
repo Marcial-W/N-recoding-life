@@ -13,7 +13,7 @@ import redis
 
 # 导入配置
 try:
-    from config import config
+    from request_manage.utils.config import config
 except ImportError:
     # 如果配置文件不存在，使用默认配置
     class DefaultConfig:

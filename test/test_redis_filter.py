@@ -7,9 +7,8 @@
 
 import logging
 import time
-import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from data_filter.redis_filter import RedisFilter
+from request_manage.utils.data_filter.redis_filter import RedisFilter
 import redis
 
 # 配置日志

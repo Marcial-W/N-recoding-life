@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 import logging
-from data_filter import RedisFilter
+from request_manage.utils.data_filter.redis_filter import RedisFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
@@ -18,7 +18,7 @@ def main():
         filter = RedisFilter()
         
         # 打印配置信息
-        from config import config
+        from request_manage.utils.config import config
         config.print_config()
 
         data = ['111', '222', '111', '222', 'hello', 'world', 'python', 'is', 'awesome']

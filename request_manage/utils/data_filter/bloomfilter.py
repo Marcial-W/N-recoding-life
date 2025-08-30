@@ -12,7 +12,7 @@ from typing import Optional
 
 # 导入配置
 try:
-    from config import config
+    from request_manage.utils.config import config
 except ImportError:
     # 如果配置文件不存在，使用默认配置
     class DefaultConfig:
@@ -158,17 +158,17 @@ class BloomFilter(object):
         """
         try:
             hash_values = self.multiple_hash.get_hash_value(data)
+            offsets = []
             for hash_value in hash_values:
                 offset = self._get_offset(hash_value)
                 self._set_bit(offset)
+                offsets.append(offset)
             logger.debug(f"数据{data}已映射到Redis位图{self.redis_key}中")
-            return True
+            return offsets
         except redis.RedisError as e:
             logger.error(f"Redis保存数据失败: {e}")
-            return False
         except Exception as e:
             logger.error(f"保存数据时发生未知错误: {e}")
-            return False
 
     def _set_bit(self, offset):
         """设置位图中的位"""

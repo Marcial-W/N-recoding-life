@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 import logging
-from data_filter import BloomFilter
+from request_manage.utils.data_filter.bloomfilter import BloomFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
@@ -18,7 +18,7 @@ def main():
         bf = BloomFilter()
         
         # 打印配置信息
-        from config import config
+        from request_manage.utils.config import config
         config.print_config()
         
         # 测试数据

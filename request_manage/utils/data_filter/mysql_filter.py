@@ -10,15 +10,15 @@ from contextlib import contextmanager
 from typing import Optional
 
 from . import BaseFilter
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Text, DateTime, ForeignKey, Boolean
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 # 导入配置
 try:
-    from config import config
+    from request_manage.utils.config import config
 except ImportError:
     # 如果配置文件不存在，使用默认配置
     class DefaultConfig:

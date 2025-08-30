@@ -7,7 +7,7 @@
 
 import logging
 import time
-from data_filter.mysql_filter import MySQLFilter
+from request_manage.utils.data_filter.mysql_filter import MySQLFilter
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)
